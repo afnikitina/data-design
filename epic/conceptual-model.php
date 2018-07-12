@@ -20,28 +20,36 @@
 				<h3>User</h3>
 				<ul>
 					<li>userId (Primary Key)</li>
-					<li>userName</li>
 					<li>userEmail</li>
-					<li>userPassword (encrypted)</li>
-					<li>userRegistrationDate</li>
-					<li>userNumberOfComments</li>
+					<li>userHash</li>
+					<li>userName</li>
 				</ul>
 			</div>
 			<div>
+				<h3>Article</h3>
+				<ul>
+					<li>articleId (Primary Key)</li>
+					<li>articleAuthor</li>
+					<li>articleContent</li>
+					<li>articleDate</li>
+					<li>articleTitle</li>
+					<li></li>
+				</ul>
+			</div>
+			<div id="comment">
 				<h3>Comment</h3>
 				<ul>
 					<li>commentId (Primary Key)</li>
+					<li>commentArticleId (Foreign Key)</li>
 					<li>commentUserId (Foreign Key)</li>
+					<li>commentContent</li>
 					<li>commentDate</li>
-					<li>commentLength</li>
-					<li>commentNumberOfLikes</li>
 				</ul>
 			</div>
 			<div>
 				<h3>Relations</h3>
 				<ul>
-					<li>One user can leave multiple comments about many different articles <code>(1-to-n)</code></li>
-					<li>Each particular comment is written by only one particular user <code>(1-to-1)</code></li>
+					<li>Many different users can post multiple comments about many different articles <code>(n-to-m)</code></li>
 				</ul>
 			</div>
 		</main>

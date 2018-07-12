@@ -17,3 +17,11 @@ li {
 	margin-right: 25px;
 	list-style: none;
 }
+
+#comment {
+	background-color: aliceblue;
+}
+
+#articleCommentId {
+	background-color: aliceblue;
+}
