@@ -1,0 +1,14 @@
+h1 {
+	color: darkred;
+}
+
+dt {
+	font-weight: bold;
+}
+
+li {
+	list-style-position: inside;
+	padding-bottom: 5px;
+	margin-right: 25px;
+	list-style: none;
+}
