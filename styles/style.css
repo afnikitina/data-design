@@ -2,8 +2,13 @@ h1 {
 	color: darkred;
 }
 
+h2 {
+	color: darkblue;
+}
+
 dt {
 	font-weight: bold;
+	font-size: 1.2em;
 }
 
 li {

@@ -24,7 +24,7 @@
 				</dl>
 			</div>
 			<div>
-				<h4>Interaction Flow</h4>
+				<h3>Interaction Flow</h3>
 				<ul>
 					<li>Jen opens email app on her iPhone, opens Cathe’s newsletter, and clicks on embedded link.</li>
 					<li>Server directs Jen to the Cathe’s blog.</li>
