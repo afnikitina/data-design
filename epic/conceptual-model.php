@@ -45,6 +45,7 @@
 					<li>commentContent</li>
 					<li>commentDate</li>
 				</ul>
+				<a href="./erd1.svg">ERD - Old Design</a>
 			</div>
 			<div id="new">
 				<h3>Comment (New Design)</h3>
@@ -54,6 +55,8 @@
 					<li>commentContent</li>
 					<li>commentDate</li>
 				</ul>
+				<a href="./erd2.svg">ERD - New Design in Crow’s Foot Notation</a>
+				<a href="./erd2.svg">ERD - New Design With Intersection Tables</a>
 			</div>
 			<div>
 				<h3>Relations</h3>
