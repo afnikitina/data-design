@@ -36,21 +36,12 @@
 					<li></li>
 				</ul>
 			</div>
-			<div id="old">
+			<div>
 				<h3>Comment (Old Design)</h3>
 				<ul>
 					<li><span>commentId (Primary Key)</span></li>
 					<li>commentArticleId (Foreign Key)</li>
 					<li>commentUserId (Foreign Key)</li>
-					<li>commentContent</li>
-					<li>commentDate</li>
-				</ul>
-			</div>
-			<div id="new">
-				<h3>Comment (New Design)</h3>
-				<ul>
-					<li><span>commentArticleId (Foreign Key)</span></li>
-					<li><span>commentUserId (Foreign Key)</span></li>
 					<li>commentContent</li>
 					<li>commentDate</li>
 				</ul>

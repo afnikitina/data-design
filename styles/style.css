@@ -25,15 +25,3 @@ li {
 span {
 	background-color: palevioletred;
 }
-
-#old    {
-	width: 300px;
-	height: 220px;
-	float: left;
-}
-
-#new  {
-	width: 600px;
-	height: 220px;
-	margin-left: 300px;
-}
