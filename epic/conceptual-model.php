@@ -19,7 +19,7 @@
 			<div>
 				<h3>User</h3>
 				<ul>
-					<li>userId (Primary Key)</li>
+					<li><span>userId (Primary Key)</span></li>
 					<li>userEmail</li>
 					<li>userHash</li>
 					<li>userName</li>
@@ -28,7 +28,7 @@
 			<div>
 				<h3>Article</h3>
 				<ul>
-					<li>articleId (Primary Key)</li>
+					<li><span>articleId (Primary Key)</span></li>
 					<li>articleAuthor</li>
 					<li>articleContent</li>
 					<li>articleDate</li>
@@ -36,12 +36,21 @@
 					<li></li>
 				</ul>
 			</div>
-			<div id="comment">
-				<h3>Comment</h3>
+			<div id="old">
+				<h3>Comment (Old Design)</h3>
 				<ul>
-					<li>commentId (Primary Key)</li>
+					<li><span>commentId (Primary Key)</span></li>
 					<li>commentArticleId (Foreign Key)</li>
 					<li>commentUserId (Foreign Key)</li>
+					<li>commentContent</li>
+					<li>commentDate</li>
+				</ul>
+			</div>
+			<div id="new">
+				<h3>Comment (New Design)</h3>
+				<ul>
+					<li><span>commentArticleId (Foreign Key)</span></li>
+					<li><span>commentUserId (Foreign Key)</span></li>
 					<li>commentContent</li>
 					<li>commentDate</li>
 				</ul>
@@ -50,6 +59,12 @@
 				<h3>Relations</h3>
 				<ul>
 					<li>Many different users can post multiple comments about many different articles <code>(n-to-m)</code></li>
+				</ul>
+			</div>
+			<div>
+				<h3>Legend</h3>
+				<ul>
+					<li><span>Primary Key/Composite Primary Key</span></li>
 				</ul>
 			</div>
 		</main>

@@ -1,3 +1,7 @@
+body {
+	background-color: aliceblue;
+}
+
 h1 {
 	color: darkred;
 }
@@ -18,10 +22,18 @@ li {
 	list-style: none;
 }
 
-#comment {
-	background-color: aliceblue;
+span {
+	background-color: palevioletred;
 }
 
-#articleCommentId {
-	background-color: aliceblue;
+#old    {
+	width: 300px;
+	height: 220px;
+	float: left;
+}
+
+#new  {
+	width: 600px;
+	height: 220px;
+	margin-left: 300px;
 }
