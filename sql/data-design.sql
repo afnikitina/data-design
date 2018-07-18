@@ -1,3 +1,4 @@
+-- This is a test mysql commands for practice only
 -- set UTF-8 charset
 ALTER DATABASE anikitina CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
@@ -43,3 +44,5 @@ CREATE TABLE `like` (
 	FOREIGN KEY(likeTweetId) REFERENCES tweet(tweetId),
 	PRIMARY KEY(likeProfileId, likeTweetId)
 );
+
+
