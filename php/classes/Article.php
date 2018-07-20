@@ -77,7 +77,7 @@ class Article
 	 *
 	 * @return Uuid value of Article ID
 	 **/
-	public function getUserId() : Uuid {
+	public function getArticleId() : Uuid {
 		return ($this->articleId);
 	}
 
