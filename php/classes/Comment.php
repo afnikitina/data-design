@@ -56,7 +56,11 @@ class Comment
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 	public function __construct($newCommentId, $newCommentArticleId, $newCommentUserId, string $newCommentContent, string $newCommentDate) {
-
+		$this->setCommentId($newCommentId);
+		$this->setCommentArticleId($newCommentArticleId);
+		$this->setCommentUserId($newCommentUserId);
+		$this->setCommentContent($newCommentContent);
+		$this->setCommentDate($newCommentDate);
 	}
 
 	/**
