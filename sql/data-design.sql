@@ -44,5 +44,3 @@ CREATE TABLE `like` (
 	FOREIGN KEY(likeTweetId) REFERENCES tweet(tweetId),
 	PRIMARY KEY(likeProfileId, likeTweetId)
 );
-
-

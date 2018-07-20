@@ -28,7 +28,7 @@ CREATE TABLE articles (
 	articleDate DATE NOT NULL,
 	articleTitle VARCHAR(92),
 	INDEX(articleAuthor(20)),
-	INDEX(articleCategory(4)),
+	INDEX(artiarticleTitlecleCategory(4)),
 	INDEX(articleTitle(20)),
 	INDEX(articleDate),
 	PRIMARY KEY(articleId)
