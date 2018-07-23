@@ -1,6 +1,8 @@
 <?php
 namespace Edu\Cnm\DataDesign;
 use Ramsey\Uuid\Uuid;
+use ValidateUuid;
+require_once(dirname(__DIR__, 2) ."/vendor/autoload.php");
 
 /**
  * Class User that represents a user of a certain fitness blog who posts her/his comment about an article she/he just read there
@@ -11,8 +13,6 @@ use Ramsey\Uuid\Uuid;
 
 class User
 {
-	// use an exter
-	use ValidateUuid;
 	/**
 	 * user ID; this is the primary key
 	 * @var Uuid $userId
@@ -134,7 +134,7 @@ class User
 	/**
 	 * mutator method for user password
 	 *
-	 * @param string $newUserHash new value of user password
+	 * @param string $newUserHash new value of user hash
 	 * @throws \RangeException if $newUserHash is not positive (in case  a number was used as a parameter)
 	 * @throws \TypeError if $newUserHash is not a uuid or string
 	 * @throws \Exception if some other exception occurs
@@ -172,4 +172,83 @@ class User
 		// if no exceptions have been thrown, assign a new value to user password
 		$this->userName = $newUserName;
 	}
+
+	/**
+	 * insert this User into mySQL
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @throws \PDOException in case of mySQL related errors
+	 **/
+	public function insertUser(\PDO $dbc): void {
+		try {
+			$query = "INSERT INTO user(userId, userEmail, userHash, userName)
+                    VALUES (:userId, :userEmail, :userHash, :userName)";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userId', $this->userId->getBytes());
+			$stmt->bindParam(':userEmail', $this->userEmail);
+			$stmt->bindParam(':userHash', $hits->userHash);
+			$stmt->bindParam(':userName', $this->userName);
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (PDOException $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+			return;
+		}
+	}
+
+	/**
+	 * update this User from mySQL where userId matches
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @throws \PDOException in case of mySQL related errors
+	 **/
+	public function updateUser(\PDO $dbc): void {
+		try {
+			$query = "UPDATE user SET userEmail = :userEmail,
+                                    userHash = :userHash,
+                                    userName = :userName WHERE userId = :userId";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userId', $this->userId->getBytes());
+			$stmt->bindParam(':userEmail', $this->userEmail);
+			$stmt->bindParam(':userHash', $hits->userHash);
+			$stmt->bindParam(':userName', $this->userName);
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (PDOException $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+			exit;
+		}
+	}
+
+	/**
+	 * delet this User from mySQL where userId matches
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @throws \PDOException in case of mySQL related errors
+	 **/
+	public function deleteUser(\PDO $dbc): void {
+		try {
+			$query = "DELETE FROM user WHERE userId = :userId";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userId', $this->userId->getBytes());
+			$stmt->execute();
+
+			// disconect from the database
+			$dbc = NULL;
+		} catch (PDOException $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+			exit;
+		}
+	}
+
+
+
+
 }
