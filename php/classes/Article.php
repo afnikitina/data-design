@@ -1,5 +1,5 @@
 <?php
-namespace Edu\Cnm\anikitina\DataDesign;
+namespace Anikitina\DataDesign;
 use Ramsey\Uuid\Uuid;
 
 
