@@ -40,9 +40,10 @@ class User
 	/**
 	 * User constructor
 	 *
-	 * @param string|Uuid $newTweetId id of this Tweet or null if a new Tweet
-	 * @param string|Uuid $newTweetProfileId id of the Profile that sent this Tweet
-	 * @param string $newTweetContent string containing actual tweet data
+	 * @param uid|string $newUserId new value of user id
+	 * @param string $newUserEmail new value of user email address
+	 * @param string $newUserHash new value of user hash
+	 * @param string $newUserName new value of user name
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws \TypeError if data types violate type hints
@@ -50,8 +51,16 @@ class User
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
 
-	public function __construct()
-	{
+	public function __construct($newUserId, string $newUserEmail, string $newUserHash, string $newUserName) {
+		try {
+			$this->setUserId($newUserId);
+			$this->setUserEmail($newUserEmail);
+			$this->setUserHash($$newUserHash);
+			$this->setUserName($newUserName);
+		} catch (\InvalidArgumentException | \RangeException | \TypeError | \Exception $e) {
+			// rethrow uncought by the mutators exceptions
+			throw(new $exceptionType($e->getMessage(), 0, $e));
+		}
 	}
 
 	/**
@@ -192,7 +201,7 @@ class User
 
 			// disconect from the database
 			$dbc = NULL;
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			$error = $e->getMessage();
 			echo "Error: " .$error;
 			return;
@@ -219,7 +228,7 @@ class User
 
 			// disconect from the database
 			$dbc = NULL;
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			$error = $e->getMessage();
 			echo "Error: " .$error;
 			exit;
@@ -241,14 +250,115 @@ class User
 
 			// disconect from the database
 			$dbc = NULL;
-		} catch (PDOException $e) {
+		} catch (\PDOException $e) {
 			$error = $e->getMessage();
 			echo "Error: " .$error;
 			exit;
 		}
 	}
 
+	/**
+	 * get the user by user ID
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @param string $currUserId user Id to search for
+	 * @return User or NULL if user is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 **/
+	public function getUserByUserId(\PDO $dbc, string $currUserId): ?User {
+		// sanitize the  user id before searching
+		try {
+			$currUserId = self::validateUuid($currUserId);
+		} catch (\Exception $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+			return NULL;
+		}
 
+		try {
+			$query = "SELECT * FROM user WHERE userId = :userId";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userId', $this->userId->getBytes());
+			$stmt->execute();
+			$errorInfo = $stmt->errorInfo();
+			if(isset($errorInfo[2])) {
+				$error = $errorInfo[2];
+			}
+		} catch(\Exception $e) {
+			$error = $e->getMessage();
+		}
 
+		try {
+			// grab the user from mySQL
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newUser = new User($row["userId"], $row["userEmail"], $row["userHash"], $row["userName"]);
+			}
+			else {
+				$newUser = NULL;
+			}
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\Exception $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+		} finally {
+			return $newUser;
+		}
+	}
+
+	/**
+	 * get the user by user email address
+	 *
+	 * @param \PDO $dbc database connection object
+	 * @param string $currUserEmail user email address to search for
+	 * @return User or NULL if user is not found
+	 * @throws \PDOException in case of mySQL related errors
+	 **/
+	public function getUserByUserEmail(\PDO $dbc, string $currUserEmail): ?User {
+		// verify that user email is secure
+		try {
+			$currUserEmail = trim($currUserEmail);
+			$currUserEmail = filter_var($currUserEmail, FILTER_VALIDATE_EMAIL);
+			if(empty($currUserEmail) === true) {
+				throw(new \InvalidArgumentException("user email is empty or insecure"));
+			}
+		} catch (\Exception $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+			return NULL;
+		}
+
+		try {
+			$query = "SELECT * FROM user WHERE userEmail = :userEmail";
+			$stmt = $dbc->prepare($query);
+			$stmt->bindParam(':userEmail', $this->userEmail);
+			$stmt->execute();
+			$errorInfo = $stmt->errorInfo();
+			if(isset($errorInfo[2])) {
+				$error = $errorInfo[2];
+			}
+		} catch(\Exception $e) {
+			$error = $e->getMessage();
+		}
+
+		try {
+			// grab the user from mySQL
+			$row = $stmt->fetch(\PDO::FETCH_ASSOC);
+			if ($row) {
+				$newUser = new User($row["userId"], $row["userEmail"], $row["userHash"], $row["userName"]);
+			}
+			else {
+				$newUser = NULL;
+			}
+			// disconect from the database
+			$dbc = NULL;
+		} catch (\Exception $e) {
+			$error = $e->getMessage();
+			echo "Error: " .$error;
+		} finally {
+			return $newUser;
+		}
+	}
 
 }
