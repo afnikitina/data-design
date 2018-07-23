@@ -1,8 +1,9 @@
 <?php
-namespace Edu\Cnm\DataDesign;
+namespace Anikitina\DataDesign;
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
-use ValidateUuid;
-require_once(dirname(__DIR__, 2) ."/vendor/autoload.php");
+
 
 /**
  * Class User that represents a user of a certain fitness blog who posts her/his comment about an article she/he just read there
@@ -13,6 +14,7 @@ require_once(dirname(__DIR__, 2) ."/vendor/autoload.php");
 
 class User
 {
+	use ValidateUuid;
 	/**
 	 * user ID; this is the primary key
 	 * @var Uuid $userId

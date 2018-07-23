@@ -1,5 +1,7 @@
 <?php
-namespace Edu\Cnm\anikitina\DataDesign;
+namespace Anikitina\DataDesign;
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 
 
@@ -12,9 +14,7 @@ use Ramsey\Uuid\Uuid;
 
 class Comment
 {
-	// use an external package for UUID validation
 	use ValidateUuid;
-
 	/**
 	 * comment ID; this is the primary key
 	 * @var Uuid $commentId
