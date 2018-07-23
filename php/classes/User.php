@@ -1,9 +1,8 @@
 <?php
 namespace Anikitina\DataDesign;
 require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
-
 
 /**
  * Class User that represents a user of a certain fitness blog who posts her/his comment about an article she/he just read there
