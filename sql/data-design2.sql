@@ -12,8 +12,10 @@ CREATE TABLE user (
 	userEmail VARCHAR(128) NOT NULL,
 	userHash CHAR(97) NOT NULL,
 	userName VARCHAR(92) NOT NULL,
-	-- create unique indexes
-	UNIQUE(userEmail),
+	-- create unique key
+	UNIQUE KEY (userEmail),
+	-- create index limiting to the first 20 characters of userName
+	-- see Learning PHP, MySQL & JavaScript with JQuery, CSS & HTML by Robin Nixon, 4th Ed., p. 187
 	INDEX(userName(20)),
 	-- create the primary key for the entity
 	PRIMARY KEY(userId)
@@ -27,6 +29,8 @@ CREATE TABLE article (
 	articleContent BLOB,
 	articleDate DATE NOT NULL,
 	articleTitle VARCHAR(92),
+	-- create indexes limiting to the specified number of first characters of data field
+	-- see Learning PHP, MySQL & JavaScript with JQuery, CSS & HTML by Robin Nixon, 4th Ed., p. 187
 	INDEX(articleAuthor(20)),
 	INDEX(articleCategory(4)),
 	INDEX(articleDate),
